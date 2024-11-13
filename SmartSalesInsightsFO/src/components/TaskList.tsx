@@ -1,46 +1,23 @@
-import { useState } from "react";
-import Task from "../types/Task";
+
 import TaskItems from "./TaskItems";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { deleteTask, toggleTask } from "./TaskSlice";
 
-interface TaskListProps {
-  tasks: Task[];
-  toggletask: (id: number) => void;
-  deletetask: (id: number) => void;
-  // addtask: (title: string) => void;
-}
-const TaskList: React.FC<TaskListProps> = ({ tasks, toggletask, deletetask }) => {
-  // const [newTaskList, setNewTaskList] = useState("");
-
-  // const AddNewTask = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (newTaskList.trim()) {
-  //     addtask(newTaskList);
-  //     setNewTaskList(""); 
-  //   }
-  // };
+const TaskList: React.FC = () => {
+  const tasks = useSelector((state: RootState) => state.tasks);
+  const dispatch = useDispatch();
   return (
-    <>
-      <div>
-        {tasks.map((task) => (
-          <TaskItems
-            task={task}
-            toggletask={toggletask}
-            deletetask={deletetask} />
-        ))}
-      </div>
-      {/* <div>
-        <h3>Add a new task</h3>
-        <form onSubmit={AddNewTask}>
-          <input
-            type="text"
-            value={newTaskList}
-            onChange={(e) => setNewTaskList(e.target.value)}
-            placeholder="Titre tsk"
-            required />
-          <button type="submit">Add</button>
-        </form>
-      </div> */}
-    </>
+    <div>
+      {tasks.map((task) => (
+        <TaskItems
+          key={task.id}
+          task={task}
+          toggletask={() => dispatch(toggleTask(task.id))}
+          deletetask={() => dispatch(deleteTask(task.id))}
+        />
+      ))}
+    </div>
   );
 };
 
