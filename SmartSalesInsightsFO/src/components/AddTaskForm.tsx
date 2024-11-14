@@ -18,12 +18,11 @@ const AddTaskForm: React.FC = () => {
   return (
     <div>
       <form onSubmit={AddNewTask}>
-        <input
-        type="text"
-        value={newTaskList}
-        onChange={(e) => setNewTaskList(e.target.value)}
-        placeholder="Titre task"
-        required />
+        <input 
+          type="text" value={newTaskList} 
+          onChange={(e) => setNewTaskList(e.target.value)} 
+          placeholder="Titre task" required
+          style={{ width: '45%', padding: '10px', border: '1px solid #ced4da', borderRadius: '4px', }} />
         <button type="submit">Ajouter</button>
       </form>
     </div>
