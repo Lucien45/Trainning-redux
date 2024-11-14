@@ -23,6 +23,11 @@ export class TaskService {
         return this.TaskRepository.save(data);
     }
 
+    async update(id: number, task: Partial<TaskInterface>): Promise<TaskInterface>{
+        await this.TaskRepository.update(id, task);
+        return this.TaskRepository.findOneBy({ id });
+    }
+
     async delete(id: number): Promise<TaskInterface[]>{
         await this.TaskRepository.delete(id);
         return this.TaskRepository.find();
