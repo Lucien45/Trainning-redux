@@ -1,8 +1,9 @@
 import "./App.css";
+import './assets/css/style.css';
 import TaskList from "./components/TaskList";
 import AddTaskForm from "./components/AddTaskForm";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./redux/store";
 
 function App() {
 

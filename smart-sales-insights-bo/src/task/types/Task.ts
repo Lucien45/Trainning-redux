@@ -1,7 +1,7 @@
-interface Task {
+interface TaskInterface {
   id: number;
   title: string;
   completed: boolean;
 }
 
-export default Task;
+export default TaskInterface;
