@@ -1,33 +1,31 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "./TaskSlice";
 
-interface AddTask {
-    addtask: (title: string) => void;
-}
-
-const AddTaskForm: React.FC<AddTask> = ({addtask}) => {
+const AddTaskForm: React.FC = () => {
 
   const [newTaskList, setNewTaskList] = useState("");
+  const dispatch = useDispatch();
 
   const AddNewTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (newTaskList.trim()) {
-      addtask(newTaskList);
-      setNewTaskList(""); 
+      dispatch(addTask(newTaskList));
+      setNewTaskList("");
     }
   };
     
   return (
     <div>
-        <h3>Add a new task</h3>
-        <form onSubmit={AddNewTask}>
-            <input
-            type="text"
-            value={newTaskList}
-            onChange={(e) => setNewTaskList(e.target.value)}
-            placeholder="Titre task"
-            required />
-            <button type="submit">Ajouter</button>
-        </form>
+      <form onSubmit={AddNewTask}>
+        <input
+        type="text"
+        value={newTaskList}
+        onChange={(e) => setNewTaskList(e.target.value)}
+        placeholder="Titre task"
+        required />
+        <button type="submit">Ajouter</button>
+      </form>
     </div>
   )
 }
